@@ -7,36 +7,18 @@ interface MilestonesSlideProps {
 }
 
 const MilestonesSlide = ({ onNavigateNext }: MilestonesSlideProps) => {
-  const yearOneHighlights = [
+  const yearOneStats = [
     {
-      label: "January 2025 Launch",
-      title: "Cakewalk Launches",
-      items: [
-        "$750K premium run rate within 90 days of launch",
-        "Five-person team built MVP platform and initial GTM distribution",
-        "Team has grown to 13 across product, engineering, and operations",
-        "Zero dollars spent on customer acquisition",
-      ],
+      value: "1,200+",
+      label: "SMBs Served",
     },
     {
-      label: "October 2025 Snapshot",
-      title: "Cakewalk October 2025",
-      items: [
-        "Team of 13 across product, engineering, and operations",
-        "1,200+ SMBs served",
-        "3,000+ employees enrolled",
-        "ARR (run rate): $700K+",
-      ],
+      value: "3,000+",
+      label: "Lives Enrolled",
     },
     {
-      label: "Capital Efficiency",
-      title: "All-in spend to date",
-      summary: "$700K",
-      items: [
-        "Talent across product and engineering",
-        "Operations and customer support capacity",
-        "Insurance infrastructure (carrier bindings, compliance, admin stack)",
-      ],
+      value: "$700K+",
+      label: "ARR Run Rate",
     },
   ];
 
@@ -102,31 +84,15 @@ const MilestonesSlide = ({ onNavigateNext }: MilestonesSlideProps) => {
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="mt-8 grid gap-6 md:grid-cols-3"
+          className="mt-8 grid w-full max-w-4xl grid-cols-3 gap-8 self-center md:gap-16"
         >
-          {yearOneHighlights.map((item) => (
-            <article
-              key={item.label}
-              className="rounded-2xl border border-brand-blue/15 bg-white/95 p-5 shadow-md"
-            >
-              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-brand-blue/70">
-                {item.label}
+          {yearOneStats.map((stat) => (
+            <div key={stat.label} className="text-center">
+              <p className="text-4xl font-bold text-brand-blue md:text-5xl lg:text-6xl">
+                {stat.value}
               </p>
-              <h2 className="mt-2 text-lg font-semibold text-brand-darkBlue">{item.title}</h2>
-              {item.summary ? (
-                <p className="mt-3 text-2xl font-bold text-brand-darkBlue">{item.summary}</p>
-              ) : null}
-              <ul className="mt-3 space-y-2">
-                {item.items.map((detail) => (
-                  <li key={detail} className="flex items-start gap-2 text-xs text-brand-gray md:text-sm">
-                    <span className="mt-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-brand-mint/20">
-                      <Check className="h-3 w-3 text-brand-teal" />
-                    </span>
-                    <span>{detail}</span>
-                  </li>
-                ))}
-              </ul>
-            </article>
+              <p className="mt-2 text-sm text-brand-gray md:text-base">{stat.label}</p>
+            </div>
           ))}
         </motion.div>
 
