@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { Check } from "lucide-react";
 import SlideContainer from "@/components/ui/SlideContainer";
+import MobileSlideContainer from "@/components/ui/MobileSlideContainer";
+import { useIsMobile } from "@/hooks/use-mobile";
 import paulPhoto from "@/assets/team-paul.jpeg";
 import jonathanPhoto from "@/assets/team-jonathan.jpeg";
 import billPhoto from "@/assets/team-bill.jpeg";
@@ -55,6 +57,61 @@ const leadership = [
 ];
 
 const Team = ({ onNavigateNext }: TeamProps) => {
+  const isMobile = useIsMobile();
+
+  // Mobile View
+  if (isMobile) {
+    return (
+      <MobileSlideContainer background="bg-white" onNavigateNext={onNavigateNext}>
+        {/* Headline */}
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="text-xl font-bold text-brand-darkBlue text-center mb-6"
+        >
+          Operators, Product Builders, and Insurance Veterans
+        </motion.h1>
+
+        {/* Team Cards - Stacked */}
+        <div className="space-y-4 w-full">
+          {leadership.map((leader, index) => (
+            <motion.article
+              key={leader.name}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.1 + index * 0.1 }}
+              className="rounded-xl border border-brand-blue/15 bg-white p-4 shadow-md"
+            >
+              <div className="flex items-center gap-3">
+                <img
+                  src={leader.image}
+                  alt={`${leader.name} headshot`}
+                  className="h-12 w-12 rounded-full object-cover shadow-sm"
+                />
+                <div>
+                  <h3 className="text-base font-semibold text-brand-darkBlue">{leader.name}</h3>
+                  <p className="text-xs font-medium text-brand-gray">{leader.title}</p>
+                </div>
+              </div>
+              <ul className="mt-3 space-y-1.5">
+                {leader.highlights.slice(0, 2).map((item) => (
+                  <li key={item} className="flex items-start gap-2 text-xs text-brand-gray">
+                    <span className="mt-0.5 flex h-3 w-3 items-center justify-center rounded-full bg-brand-mint/40 flex-shrink-0">
+                      <Check className="h-2 w-2 text-brand-teal" />
+                    </span>
+                    <span className="leading-tight">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </motion.article>
+          ))}
+        </div>
+      </MobileSlideContainer>
+    );
+  }
+
+  // Desktop View
   return (
     <SlideContainer background="bg-white" onNavigateNext={onNavigateNext} sectionLabel="Team">
       <div className="absolute inset-0 flex flex-col px-10 pb-12 pt-10 md:px-14 lg:px-16">

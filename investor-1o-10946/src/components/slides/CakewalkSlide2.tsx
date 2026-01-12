@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import SlideContainer from "@/components/ui/SlideContainer";
+import MobileSlideContainer from "@/components/ui/MobileSlideContainer";
+import { useIsMobile } from "@/hooks/use-mobile";
 import prudentialLogo from "@/assets/prudential-logo.png";
 import metlifeLogo from "@/assets/metlife-logo.png";
 import sunlifeLogo from "@/assets/sunlife-logo.png";
@@ -94,6 +96,149 @@ interface CakewalkSlide2Props {
 }
 
 const CakewalkSlide2 = ({ onNavigateNext }: CakewalkSlide2Props) => {
+  const isMobile = useIsMobile();
+
+  // Mobile View
+  if (isMobile) {
+    return (
+      <MobileSlideContainer
+        background="bg-gradient-to-br from-brand-cream/40 via-white to-brand-lightMint/40"
+        onNavigateNext={onNavigateNext}
+      >
+        {/* Headline */}
+        <motion.h1
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-center text-2xl font-bold text-brand-darkBlue mb-6"
+        >
+          Cakewalk:{" "}
+          <span className="text-brand-blue">Better benefits, in minutes.</span>
+        </motion.h1>
+
+        {/* Pooling Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="w-full"
+        >
+          <h2 className="text-lg font-bold text-brand-darkBlue mb-4 text-center">
+            Same Pool, Same Risk, Same Benefits
+          </h2>
+
+          {/* Pooling Visual - Stacked */}
+          <div className="flex flex-col items-center gap-4">
+            {/* Enterprise Circle */}
+            <div className="flex flex-col items-center">
+              <div className="flex h-24 w-24 items-center justify-center rounded-full bg-brand-blue shadow-lg">
+                <motion.div
+                  className="w-14 h-14 rounded-full bg-white/20 border-2 border-white/40"
+                  animate={{
+                    scale: [1, 1.15, 1],
+                    opacity: [0.8, 1, 0.8],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                />
+              </div>
+              <span className="mt-2 text-xs font-semibold text-brand-darkBlue text-center">
+                1 Enterprise Company
+              </span>
+            </div>
+
+            {/* Equals Sign */}
+            <span className="text-3xl font-bold text-brand-darkBlue">=</span>
+
+            {/* SMB Pooling Circle */}
+            <div className="flex flex-col items-center">
+              <div className="relative flex h-24 w-24 items-center justify-center rounded-full bg-brand-mint shadow-lg overflow-hidden">
+                <motion.div
+                  className="absolute inset-0 flex items-center justify-center"
+                  animate={{
+                    scale: [1, 1.08, 1],
+                    opacity: [0.85, 1, 0.85],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                >
+                  {/* Simplified honeycomb for mobile */}
+                  <div className="absolute w-5 h-5 rounded-full bg-white/30 border-2 border-white/50" style={{ left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }} />
+                  {[0, 60, 120, 180, 240, 300].map((angle, i) => {
+                    const rad = (angle * Math.PI) / 180;
+                    const x = 50 + Math.cos(rad) * 20;
+                    const y = 50 + Math.sin(rad) * 20;
+                    return (
+                      <div
+                        key={`inner-${i}`}
+                        className="absolute w-4 h-4 rounded-full bg-white/25 border border-white/40"
+                        style={{ left: `${x}%`, top: `${y}%`, transform: 'translate(-50%, -50%)' }}
+                      />
+                    );
+                  })}
+                </motion.div>
+              </div>
+              <span className="mt-2 text-xs font-semibold text-brand-darkBlue text-center">
+                SMBs pooled via Cakewalk
+              </span>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Carrier Validated Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="mt-8 text-center w-full"
+        >
+          <h3 className="text-base font-bold text-brand-blue">
+            Carrier Validated
+          </h3>
+          <p className="mt-1 text-xs text-brand-gray">
+            Delegated underwriting authority from tier-1 carriers
+          </p>
+
+          {/* Carrier Logos */}
+          <div className="mt-3 flex items-center justify-center gap-4">
+            <img src={prudentialLogo} alt="Prudential" className="h-8 w-auto object-contain opacity-80" />
+            <img src={metlifeLogo} alt="MetLife" className="h-8 w-auto object-contain opacity-80" />
+            <img src={sunlifeLogo} alt="Sun Life" className="h-8 w-auto object-contain opacity-80" />
+          </div>
+        </motion.div>
+
+        {/* Product Demo Tabs - Simplified for mobile */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
+          className="mt-8 w-full"
+        >
+          <div className="bg-white rounded-lg shadow-md border border-gray-200 p-4">
+            <p className="text-xs text-brand-gray text-center mb-3">Experience the platform</p>
+            <div className="grid grid-cols-2 gap-2">
+              {["Registration", "Underwriting", "Checkout", "Benefits Wallet"].map((tab) => (
+                <div
+                  key={tab}
+                  className="bg-brand-blue/5 rounded-lg px-3 py-2 text-center"
+                >
+                  <span className="text-xs font-medium text-brand-blue">{tab}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+      </MobileSlideContainer>
+    );
+  }
+
+  // Desktop View
   return (
     <SlideContainer
       background="bg-gradient-to-br from-brand-cream/40 via-white to-brand-lightMint/40"

@@ -1,11 +1,15 @@
 import { motion } from "framer-motion";
 import SlideContainer from "@/components/ui/SlideContainer";
+import MobileSlideContainer from "@/components/ui/MobileSlideContainer";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface MilestonesSlideProps {
   onNavigateNext: () => void;
 }
 
 const MilestonesSlide = ({ onNavigateNext }: MilestonesSlideProps) => {
+  const isMobile = useIsMobile();
+
   // Traction stats
   const tractionStats = [
     { value: "1,200+", label: "SMBs Served" },
@@ -13,6 +17,43 @@ const MilestonesSlide = ({ onNavigateNext }: MilestonesSlideProps) => {
     { value: "$700K+", label: "ARR Run Rate" },
   ];
 
+  // Mobile View
+  if (isMobile) {
+    return (
+      <MobileSlideContainer
+        background="bg-white"
+        onNavigateNext={onNavigateNext}
+      >
+        {/* Traction Headline */}
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-2xl font-bold text-brand-darkBlue text-center mb-8"
+        >
+          Momentum Built with <span className="text-brand-blue">Speed</span>
+        </motion.h1>
+
+        {/* Traction Stats - Stacked */}
+        <div className="space-y-6 w-full">
+          {tractionStats.map((stat, index) => (
+            <motion.div
+              key={stat.label}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
+              className="text-center"
+            >
+              <p className="text-4xl font-bold text-brand-blue">{stat.value}</p>
+              <p className="mt-2 text-base text-brand-gray">{stat.label}</p>
+            </motion.div>
+          ))}
+        </div>
+      </MobileSlideContainer>
+    );
+  }
+
+  // Desktop View
   return (
     <SlideContainer
       background="bg-white"

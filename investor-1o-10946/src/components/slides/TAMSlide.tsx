@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 import SlideContainer from "@/components/ui/SlideContainer";
+import MobileSlideContainer from "@/components/ui/MobileSlideContainer";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface TAMSlideProps {
   onNavigateNext: () => void;
@@ -10,6 +12,8 @@ interface TAMSlideProps {
  * YC-style: simple framing, big numbers, clear addressable definition
  */
 const TAMSlide = ({ onNavigateNext }: TAMSlideProps) => {
+  const isMobile = useIsMobile();
+
   const samCircle = {
     id: "sam",
     label: "SAM",
@@ -78,6 +82,68 @@ const TAMSlide = ({ onNavigateNext }: TAMSlideProps) => {
     },
   ];
 
+  // Mobile View
+  if (isMobile) {
+    return (
+      <MobileSlideContainer
+        background="bg-gradient-to-br from-white via-brand-cream/30 to-brand-lightBlue/10"
+        onNavigateNext={onNavigateNext}
+      >
+        {/* Headline */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-xl font-bold text-brand-darkBlue text-center mb-6"
+        >
+          <h1 className="mb-1">Cakewalk unlocks benefits for SMBs.</h1>
+          <h1 className="text-lg">The largest overlooked insurance market in the U.S.</h1>
+        </motion.div>
+
+        {/* TAM Visualization - Scaled down */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="relative flex items-center justify-center mb-6"
+        >
+          <div className="relative h-48 w-48">
+            {/* TAM Circle */}
+            <div className="absolute inset-0 flex items-center justify-center rounded-full bg-brand-blue text-white shadow-md">
+              <span className="absolute top-3 text-lg font-bold">$1.69T</span>
+            </div>
+
+            {/* SAM Circle */}
+            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 h-28 w-28 flex items-center justify-center rounded-full bg-brand-mint text-brand-darkBlue shadow-lg">
+              <span className="absolute top-2 text-base font-bold">$656B</span>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Legend */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.4 }}
+          className="space-y-3 w-full"
+        >
+          {circleDetails.map((item) => (
+            <div key={item.id} className="flex items-center gap-2">
+              <span className={`h-3 w-3 rounded-full ${item.circleClassName}`} />
+              <div>
+                <p className={`text-xs font-semibold uppercase tracking-widest ${item.labelClassName}`}>
+                  {item.label}
+                </p>
+                <p className="text-xs text-brand-gray">{item.detail}</p>
+              </div>
+            </div>
+          ))}
+        </motion.div>
+      </MobileSlideContainer>
+    );
+  }
+
+  // Desktop View
   return (
     <SlideContainer
       background="bg-gradient-to-br from-white via-brand-cream/30 to-brand-lightBlue/10"

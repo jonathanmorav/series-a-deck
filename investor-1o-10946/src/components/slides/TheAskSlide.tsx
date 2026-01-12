@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 import SlideContainer from "@/components/ui/SlideContainer";
+import MobileSlideContainer from "@/components/ui/MobileSlideContainer";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface TheAskSlideProps {
   onNavigateNext: () => void;
@@ -10,6 +12,8 @@ interface TheAskSlideProps {
  * Investment ask with growth milestones and integrated allocation.
  */
 const TheAskSlide = ({ onNavigateNext }: TheAskSlideProps) => {
+  const isMobile = useIsMobile();
+
   // Milestone matrix with integrated allocation percentages
   const workStreams = [
     {
@@ -41,6 +45,118 @@ const TheAskSlide = ({ onNavigateNext }: TheAskSlideProps) => {
     },
   ];
 
+  // Mobile View
+  if (isMobile) {
+    return (
+      <MobileSlideContainer
+        background="bg-gradient-to-br from-brand-darkBlue via-brand-blue/95 to-brand-purple/90"
+        onNavigateNext={onNavigateNext}
+      >
+        {/* Glow effect */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-48 bg-brand-mint/10 rounded-full blur-3xl" />
+
+        {/* Headline */}
+        <motion.h2
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="text-xl font-bold text-white text-center mb-6 relative z-10"
+        >
+          We're raising $5M to accelerate product build, scale distribution, and build infrastructure for growth.
+        </motion.h2>
+
+        {/* Funding Card */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="bg-white rounded-xl shadow-lg p-6 text-center mb-6 w-full relative z-10"
+        >
+          <p className="text-brand-gray text-sm mb-2">We are raising</p>
+          <p className="text-4xl font-bold text-brand-darkBlue mb-2">$5M</p>
+          <p className="text-brand-blue text-lg font-medium">Series A</p>
+          <p className="text-brand-gray text-xs mt-2">Pre-money valuation: $36.6M</p>
+
+          <div className="mt-4 pt-3 border-t border-gray-200">
+            <p className="text-brand-gray text-xs uppercase tracking-widest">Initial Close</p>
+            <p className="mt-1 text-lg font-semibold text-brand-darkBlue">February 2025</p>
+          </div>
+        </motion.div>
+
+        {/* Milestones Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="bg-white rounded-xl shadow-lg p-5 w-full relative z-10"
+        >
+          <h3 className="text-base font-bold text-brand-darkBlue text-center mb-4">
+            Sequenced Growth Milestones
+          </h3>
+
+          {/* Timeline Labels */}
+          <div className="flex justify-between mb-3 px-2">
+            <div className="flex items-center">
+              <div className="w-2 h-2 bg-brand-blue rounded-full" />
+              <span className="ml-1 text-[10px] font-bold text-brand-blue">Q1 2026</span>
+            </div>
+            <div className="flex items-center">
+              <div className="w-2 h-2 bg-brand-mint rounded-full" />
+              <span className="ml-1 text-[10px] font-bold text-brand-mint">End 2026</span>
+            </div>
+            <div className="flex items-center">
+              <div className="w-2 h-2 bg-brand-cyan rounded-full" />
+              <span className="ml-1 text-[10px] font-bold text-brand-cyan">End 2027</span>
+            </div>
+          </div>
+
+          {/* Work Streams */}
+          <div className="space-y-4">
+            {workStreams.map((stream, index) => (
+              <motion.div
+                key={stream.name}
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.3, delay: 0.5 + index * 0.1 }}
+              >
+                {/* Stream Header */}
+                <div className="flex items-center mb-2">
+                  <div className={`w-2 h-2 ${stream.color} rounded-full mr-2`} />
+                  <span className="text-xs font-semibold text-brand-darkBlue">
+                    {stream.name} <span className={`${stream.textColor}`}>({stream.allocation})</span>
+                  </span>
+                </div>
+
+                {/* Gradient Line */}
+                <div className="h-0.5 bg-gradient-to-r from-brand-blue via-brand-mint to-brand-cyan rounded mb-2" />
+
+                {/* Milestones Grid */}
+                <div className="grid grid-cols-3 gap-2 text-[10px] text-brand-gray">
+                  <div>
+                    {stream.shortTerm.slice(0, 2).map((item, i) => (
+                      <p key={i} className="leading-tight mb-1">• {item}</p>
+                    ))}
+                  </div>
+                  <div>
+                    {stream.mediumTerm.slice(0, 2).map((item, i) => (
+                      <p key={i} className="leading-tight mb-1">• {item}</p>
+                    ))}
+                  </div>
+                  <div>
+                    {stream.longTerm.slice(0, 2).map((item, i) => (
+                      <p key={i} className="leading-tight mb-1">• {item}</p>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+      </MobileSlideContainer>
+    );
+  }
+
+  // Desktop View
   return (
     <SlideContainer
       background="bg-gradient-to-br from-brand-darkBlue via-brand-blue/95 to-brand-purple/90"

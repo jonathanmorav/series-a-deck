@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 import SlideContainer from "@/components/ui/SlideContainer";
+import MobileSlideContainer from "@/components/ui/MobileSlideContainer";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { Check } from "lucide-react";
 import paulPhoto from "@/assets/team-paul.jpeg";
 import kevinPhoto from "@/assets/board-kevin.jpeg";
@@ -10,6 +12,8 @@ interface BoardAdvisorsSlideProps {
 }
 
 const BoardAdvisorsSlide = ({ onNavigateNext }: BoardAdvisorsSlideProps) => {
+  const isMobile = useIsMobile();
+
   const boardMembers = [
     {
       name: "Paul Gable",
@@ -42,6 +46,69 @@ const BoardAdvisorsSlide = ({ onNavigateNext }: BoardAdvisorsSlideProps) => {
     },
   ];
 
+  // Mobile View
+  if (isMobile) {
+    return (
+      <MobileSlideContainer
+        background="bg-gradient-to-br from-white via-brand-cream/30 to-brand-lightMint/20"
+        onNavigateNext={onNavigateNext}
+      >
+        {/* Headline */}
+        <motion.h1
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="text-2xl font-bold text-brand-darkBlue text-center mb-6"
+        >
+          Board of Directors
+        </motion.h1>
+
+        {/* Board Members - Stacked */}
+        <div className="space-y-4 w-full">
+          {boardMembers.map((member, index) => (
+            <motion.article
+              key={member.name}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.1 + index * 0.1 }}
+              className="rounded-xl border border-brand-blue/15 bg-white p-4 shadow-md"
+            >
+              <p className="text-[10px] font-semibold uppercase tracking-widest text-brand-blue/70 mb-3">
+                Board
+              </p>
+              <div className="flex items-center gap-3">
+                <img
+                  src={member.image}
+                  alt={`${member.name} headshot`}
+                  className="h-12 w-12 rounded-full object-cover shadow-sm"
+                />
+                <div>
+                  <h3 className="text-base font-semibold text-brand-darkBlue">{member.name}</h3>
+                  {member.title && (
+                    <p className="text-xs font-medium text-brand-gray">{member.title}</p>
+                  )}
+                </div>
+              </div>
+              {member.highlights.length > 0 && (
+                <ul className="mt-3 space-y-1.5">
+                  {member.highlights.slice(0, 2).map((item) => (
+                    <li key={item} className="flex items-start gap-2 text-xs text-brand-gray">
+                      <span className="mt-0.5 flex h-3 w-3 items-center justify-center rounded-full bg-brand-mint/40 flex-shrink-0">
+                        <Check className="h-2 w-2 text-brand-teal" />
+                      </span>
+                      <span className="leading-tight">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </motion.article>
+          ))}
+        </div>
+      </MobileSlideContainer>
+    );
+  }
+
+  // Desktop View
   return (
     <SlideContainer
       background="bg-gradient-to-br from-white via-brand-cream/30 to-brand-lightMint/20"
