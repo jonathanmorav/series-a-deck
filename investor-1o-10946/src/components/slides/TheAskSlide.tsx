@@ -51,8 +51,8 @@ const TheAskSlide = ({ onNavigateNext }: TheAskSlideProps) => {
           transition={{ duration: 0.5 }}
           className="mb-6"
         >
-          <h2 className="text-4xl font-bold text-white">
-            The Ask
+          <h2 className="text-3xl md:text-4xl font-bold text-white">
+            We're raising $5M to accelerate product, scale distribution, and build for growth.
           </h2>
         </motion.div>
 
