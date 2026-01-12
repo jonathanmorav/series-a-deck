@@ -20,6 +20,10 @@ interface SlideContainerProps {
   slideNumber?: number;
   /** Total slides for display (optional) */
   totalSlides?: number;
+  /** Section label to show in upper left corner */
+  sectionLabel?: string;
+  /** Whether the label should be light (for dark backgrounds) */
+  lightLabel?: boolean;
 }
 
 /**
@@ -45,6 +49,8 @@ const SlideContainer: React.FC<SlideContainerProps> = ({
   navArrowClassName = "text-brand-blue hover:text-brand-mint transition-colors",
   slideNumber,
   totalSlides,
+  sectionLabel,
+  lightLabel = false,
 }) => {
   return (
     <section
@@ -74,6 +80,20 @@ const SlideContainer: React.FC<SlideContainerProps> = ({
           className
         )}
       >
+        {/* Section Label - Upper Left Corner */}
+        {sectionLabel && (
+          <div className="absolute top-4 left-6 z-30">
+            <span
+              className={cn(
+                "text-xs font-semibold uppercase tracking-wider",
+                lightLabel ? "text-white/70" : "text-brand-gray/60"
+              )}
+            >
+              {sectionLabel}
+            </span>
+          </div>
+        )}
+
         {/* Slide Content Area */}
         <div className="absolute inset-0 flex flex-col">
           {/* Main Content */}

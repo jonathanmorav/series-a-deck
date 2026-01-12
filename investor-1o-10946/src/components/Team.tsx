@@ -17,6 +17,7 @@ const leadership = [
     image: paulPhoto,
     highlights: [
       "ex-Chief Underwriting Officer at Prudential",
+      "Leading expert on group benefit underwriting",
       "Former Chief Insurance Officer at Salty (acquired by CDK Global).",
       "President at IBX, exited to Alliant Insurance Services"
     ]
@@ -55,7 +56,7 @@ const leadership = [
 
 const Team = ({ onNavigateNext }: TeamProps) => {
   return (
-    <SlideContainer background="bg-white" onNavigateNext={onNavigateNext}>
+    <SlideContainer background="bg-white" onNavigateNext={onNavigateNext} sectionLabel="Team">
       <div className="absolute inset-0 flex flex-col px-10 pb-12 pt-10 md:px-14 lg:px-16">
         <motion.header
           initial={{ opacity: 0, y: 20 }}

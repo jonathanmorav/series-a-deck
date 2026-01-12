@@ -102,6 +102,7 @@ const CompetitiveAdvantageSlide = ({ onNavigateNext }: CompetitiveAdvantageSlide
     <SlideContainer
       background="bg-white"
       onNavigateNext={onNavigateNext}
+      sectionLabel="Competitive Advantage"
     >
       <div className="absolute inset-0 flex flex-col px-10 pb-12 pt-10 md:px-14 lg:px-16">
         {/* Headline */}

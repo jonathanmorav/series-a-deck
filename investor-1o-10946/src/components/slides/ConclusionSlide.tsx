@@ -53,6 +53,8 @@ const ConclusionSlide = ({ onNavigateNext }: ConclusionSlideProps) => {
       background="bg-gradient-to-br from-brand-darkBlue via-brand-blue to-brand-purple/90"
       onNavigateNext={onNavigateNext}
       navArrowClassName="text-white hover:text-brand-mint transition-colors"
+      sectionLabel="Conclusion"
+      lightLabel
     >
       {/* Glow effects for atmosphere */}
       <div className="absolute top-20 right-1/4 w-96 h-96 bg-brand-mint/10 rounded-full blur-3xl" />

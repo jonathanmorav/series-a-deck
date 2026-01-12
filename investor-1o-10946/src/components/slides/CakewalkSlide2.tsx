@@ -98,6 +98,7 @@ const CakewalkSlide2 = ({ onNavigateNext }: CakewalkSlide2Props) => {
     <SlideContainer
       background="bg-gradient-to-br from-brand-cream/40 via-white to-brand-lightMint/40"
       onNavigateNext={onNavigateNext}
+      sectionLabel="Cakewalk"
     >
       <div className="absolute inset-0 flex flex-col px-10 md:px-14 lg:px-16 pb-12 pt-10">
         {/* Headline */}

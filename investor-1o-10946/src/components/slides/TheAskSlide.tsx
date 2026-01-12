@@ -37,6 +37,8 @@ const TheAskSlide = ({ onNavigateNext }: TheAskSlideProps) => {
       background="bg-gradient-to-br from-brand-darkBlue via-brand-blue/95 to-brand-purple/90"
       onNavigateNext={onNavigateNext}
       navArrowClassName="text-white hover:text-brand-mint transition-colors"
+      sectionLabel="The Ask"
+      lightLabel
     >
       {/* Glow effects */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-brand-mint/10 rounded-full blur-3xl" />

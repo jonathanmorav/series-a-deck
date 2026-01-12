@@ -44,6 +44,8 @@ const SolutionSlide = ({ onNavigateNext }: SolutionSlideProps) => {
       background="bg-gradient-to-br from-brand-darkBlue via-brand-blue/90 to-brand-purple/80"
       onNavigateNext={onNavigateNext}
       navArrowClassName="text-white hover:text-brand-mint transition-colors"
+      sectionLabel="The Solution"
+      lightLabel
     >
       {/* Subtle glow */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-brand-mint/10 rounded-full blur-3xl" />

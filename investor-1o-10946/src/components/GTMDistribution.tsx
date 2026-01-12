@@ -35,6 +35,7 @@ const GTMDistribution = ({ onNavigateNext }: GTMDistributionProps) => {
     <SlideContainer
       background="bg-white"
       onNavigateNext={onNavigateNext}
+      sectionLabel="Go-To-Market"
     >
       {/* Content */}
       <div className="absolute inset-0 flex flex-col items-center justify-center px-8 md:px-16 pb-20 z-10">

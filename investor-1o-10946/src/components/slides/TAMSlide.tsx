@@ -82,6 +82,7 @@ const TAMSlide = ({ onNavigateNext }: TAMSlideProps) => {
     <SlideContainer
       background="bg-gradient-to-br from-white via-brand-cream/30 to-brand-lightBlue/10"
       onNavigateNext={onNavigateNext}
+      sectionLabel="Total Addressable Market"
     >
       <div className="absolute inset-0 flex flex-col items-center justify-center px-8 md:px-12 lg:px-16 pb-16">
         <motion.div

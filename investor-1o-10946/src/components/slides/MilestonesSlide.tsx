@@ -67,6 +67,7 @@ const MilestonesSlide = ({ onNavigateNext }: MilestonesSlideProps) => {
     <SlideContainer
       background="bg-gradient-to-br from-brand-cream/40 via-white to-brand-lightMint/35"
       onNavigateNext={onNavigateNext}
+      sectionLabel="Milestones"
     >
       <div className="absolute inset-0 flex flex-col px-10 pb-12 pt-10 md:px-14 lg:px-16">
         <motion.div
