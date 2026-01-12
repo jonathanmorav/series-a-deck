@@ -68,6 +68,7 @@ const TheAskSlide = ({ onNavigateNext }: TheAskSlideProps) => {
               <p className="text-white/60 text-lg mb-2">We are raising</p>
               <p className="text-6xl font-bold text-white mb-2">$5M</p>
               <p className="text-brand-mint text-xl font-medium">Series A</p>
+              <p className="text-white/50 text-sm mt-2">Pre-money valuation: $36.6M</p>
 
               <div className="mt-6 pt-4 border-t border-white/20">
                 <div className="text-center">

@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { Check } from "lucide-react";
 import SlideContainer from "@/components/ui/SlideContainer";
 
 interface MilestonesSlideProps {
@@ -7,136 +6,204 @@ interface MilestonesSlideProps {
 }
 
 const MilestonesSlide = ({ onNavigateNext }: MilestonesSlideProps) => {
-  const yearOneStats = [
-    {
-      value: "1,200+",
-      label: "SMBs Served",
-    },
-    {
-      value: "$3,000,000+",
-      label: "Gross Written Premium",
-    },
-    {
-      value: "$700K+",
-      label: "ARR Run Rate",
-    },
+  // Traction stats
+  const tractionStats = [
+    { value: "1,200+", label: "SMBs Served" },
+    { value: "$3,000,000+", label: "Gross Written Premium" },
+    { value: "$700K+", label: "ARR Run Rate" },
   ];
 
-  const milestoneGroups = [
+  // Milestone matrix: rows are work streams, columns are time horizons
+  const workStreams = [
     {
-      title: "Short-Term Milestones",
-      timeframe: "End of Q1 2026",
-      accentClass: "bg-soft-purple/60 text-brand-purple",
-      checkClass: "text-brand-purple",
-      items: [
-        "Complete TPA licensing in 15 target states",
-        "Scale reseller program from 20 to 200 active agents",
-        "Expand affinity group partners from 3 to 5 communities",
-        "Launch first embedded platform partnership",
+      name: "Product & Engineering",
+      color: "bg-brand-blue",
+      shortTerm: [
+        "Partners Portal launch",
+        "Billing & payment automation",
+        "Complete carrier integrations",
+      ],
+      mediumTerm: [
+        "Customer service automation",
+        "Deal cycle optimization tools",
+        "Self-service employer portal",
+      ],
+      longTerm: [
+        "AI-powered recommendations",
+        "Enterprise-grade platform",
+        "401(k) product integration",
       ],
     },
     {
-      title: "Medium-Term Objectives",
-      timeframe: "End of Year 2026",
-      accentClass: "bg-brand-mint/40 text-brand-teal",
-      checkClass: "text-brand-teal",
-      items: [
-        "Reach 15,000 lives served milestone",
-        "Achieve TPA licensing in 40 states",
-        "Operate agent reseller platform at scale (1,000+ agents reselling)",
-        "Launch broker enablement platform",
-        "Establish profitability at unit economic level",
+      name: "GTM",
+      color: "bg-brand-mint",
+      shortTerm: [
+        "Scale to 200 active agents",
+        "5 affinity group partnerships",
+      ],
+      mediumTerm: [
+        "1,000+ agents reselling",
+        "Launch embedded partnerships",
+        "National broker network",
+      ],
+      longTerm: [
+        "Enterprise partnership capability",
+        "Multi-channel distribution at scale",
+        "International expansion readiness",
       ],
     },
     {
-      title: "Long-Term Targets",
-      timeframe: "End of Year 2027",
-      accentClass: "bg-soft-yellow/60 text-amber-600",
-      checkClass: "text-amber-500",
-      items: [
-        "Scale to 40,000+ lives",
-        "National TPA footprint across all 50 states",
-        "Achieve operating profitability",
-        "Establish enterprise-level partnership capability",
-        "Introduce new financial wellness products (401(k) for SMBs)",
+      name: "Insurance Operations",
+      color: "bg-brand-purple",
+      shortTerm: [
+        "TPA licensing in 15 states",
+        "Carrier integrations complete",
+      ],
+      mediumTerm: [
+        "TPA licensing in 40 states",
+        "Unit economic profitability",
+        "Claims automation",
+      ],
+      longTerm: [
+        "National footprint (50 states)",
+        "Operating profitability",
+        "New carrier partnerships",
       ],
     },
   ];
 
   return (
     <SlideContainer
-      background="bg-gradient-to-br from-brand-cream/40 via-white to-brand-lightMint/35"
+      background="bg-white"
       onNavigateNext={onNavigateNext}
       sectionLabel="Milestones"
     >
-      <div className="absolute inset-0 flex flex-col px-10 pb-12 pt-10 md:px-14 lg:px-16">
+      <div className="absolute inset-0 flex flex-col px-10 pb-16 pt-10 md:px-14 lg:px-16">
+        {/* Traction Headline */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="mx-auto mt-6 w-full text-center"
+          className="text-center"
         >
-          <h1 className="text-4xl font-bold text-brand-darkBlue md:text-5xl">
-            Momentum Built with Speed
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-brand-darkBlue">
+            Momentum Built with <span className="text-brand-blue">Speed</span>
           </h1>
         </motion.div>
 
+        {/* Traction Stats */}
         <motion.div
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="mt-8 grid w-full max-w-5xl grid-cols-3 gap-4 self-center md:gap-8"
+          className="mt-6 grid w-full max-w-5xl grid-cols-3 gap-6 self-center"
         >
-          {yearOneStats.map((stat) => (
+          {tractionStats.map((stat) => (
             <div key={stat.label} className="text-center">
-              <p className="text-2xl font-bold text-brand-blue md:text-3xl lg:text-4xl">
+              <p className="text-3xl md:text-4xl lg:text-5xl font-bold text-brand-blue">
                 {stat.value}
               </p>
-              <p className="mt-2 text-sm text-brand-gray md:text-base">{stat.label}</p>
+              <p className="mt-2 text-sm md:text-base text-brand-gray">{stat.label}</p>
             </div>
           ))}
         </motion.div>
 
+        {/* Timeline */}
         <motion.div
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="mt-10 text-center"
+          transition={{ duration: 0.6, delay: 0.15 }}
+          className="flex-1 flex flex-col justify-center max-w-6xl mx-auto w-full"
         >
-          <h2 className="text-2xl font-semibold text-brand-darkBlue md:text-3xl">
-            Sequenced Growth Milestones Over 18 Months
+          {/* Milestones Subheadline */}
+          <h2 className="text-2xl md:text-3xl font-semibold text-brand-darkBlue text-center mb-4">
+            Sequenced Growth Milestones
           </h2>
-        </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.25 }}
-          className="mt-6 grid flex-1 gap-6 md:grid-cols-3"
-        >
-          {milestoneGroups.map((group) => (
-            <article
-              key={group.title}
-              className="rounded-2xl border border-brand-blue/15 bg-white/95 p-5 shadow-md"
-            >
-              <span
-                className={`inline-flex items-center justify-center rounded-full px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.25em] ${group.accentClass}`}
+          {/* Timeline Header - Labels at top */}
+          <div className="flex items-center gap-4 mb-3">
+            <div className="w-44 flex-shrink-0" /> {/* Spacer for work stream column */}
+            <div className="flex-1 flex justify-between">
+              <div className="w-1/3 pr-4">
+                <div className="flex items-center">
+                  <div className="w-3 h-3 bg-brand-blue rounded-full ring-4 ring-brand-blue/20" />
+                  <span className="ml-2 text-sm font-bold text-brand-blue uppercase tracking-wide">Q1 2026</span>
+                </div>
+              </div>
+              <div className="w-1/3 pr-4">
+                <div className="flex items-center">
+                  <div className="w-3 h-3 bg-brand-mint rounded-full ring-4 ring-brand-mint/20" />
+                  <span className="ml-2 text-sm font-bold text-brand-mint uppercase tracking-wide">End 2026</span>
+                </div>
+              </div>
+              <div className="w-1/3">
+                <div className="flex items-center">
+                  <div className="w-3 h-3 bg-brand-cyan rounded-full ring-4 ring-brand-cyan/20" />
+                  <span className="ml-2 text-sm font-bold text-brand-cyan uppercase tracking-wide">End 2027</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Work Stream Timelines */}
+          <div className="flex flex-col gap-5">
+            {workStreams.map((stream, rowIndex) => (
+              <motion.div
+                key={stream.name}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 + rowIndex * 0.1 }}
+                className="flex items-start gap-4"
               >
-                {group.timeframe}
-              </span>
-              <h3 className="mt-3 text-lg font-semibold text-brand-darkBlue">{group.title}</h3>
-              <ul className="mt-3 space-y-2">
-                {group.items.map((detail) => (
-                  <li key={detail} className="flex items-start gap-2 text-xs text-brand-gray md:text-sm">
-                    <span className="mt-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-brand-mint/30">
-                      <Check className={`h-3 w-3 ${group.checkClass}`} />
-                    </span>
-                    <span>{detail}</span>
-                  </li>
-                ))}
-              </ul>
-            </article>
-          ))}
+                {/* Work Stream Label */}
+                <div className="w-44 flex-shrink-0 flex items-center">
+                  <div className={`w-3 h-3 ${stream.color} rounded-full mr-3`} />
+                  <span className="text-sm font-semibold text-brand-darkBlue">
+                    {stream.name}
+                  </span>
+                </div>
+
+                {/* Timeline Content */}
+                <div className="flex-1 relative">
+                  {/* Horizontal Line with Arrow */}
+                  <div className="absolute top-1 left-0 right-0 flex items-center">
+                    <div className="flex-1 h-0.5 bg-gradient-to-r from-brand-blue via-brand-mint to-brand-cyan" />
+                    <div className="w-0 h-0 border-t-[5px] border-t-transparent border-b-[5px] border-b-transparent border-l-[8px] border-l-brand-cyan" />
+                  </div>
+                  
+                  {/* Milestone Content */}
+                  <div className="relative flex justify-between pt-3">
+                    {/* Short Term */}
+                    <div className="w-1/3 pr-4">
+                      <ul className="space-y-0.5">
+                        {stream.shortTerm.map((item, i) => (
+                          <li key={i} className="text-xs text-brand-gray">{item}</li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {/* Medium Term */}
+                    <div className="w-1/3 pr-4">
+                      <ul className="space-y-0.5">
+                        {stream.mediumTerm.map((item, i) => (
+                          <li key={i} className="text-xs text-brand-gray">{item}</li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {/* Long Term */}
+                    <div className="w-1/3">
+                      <ul className="space-y-0.5">
+                        {stream.longTerm.map((item, i) => (
+                          <li key={i} className="text-xs text-brand-gray">{item}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </motion.div>
       </div>
     </SlideContainer>

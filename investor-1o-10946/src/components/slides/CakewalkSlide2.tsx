@@ -129,18 +129,31 @@ const CakewalkSlide2 = ({ onNavigateNext }: CakewalkSlide2Props) => {
 
             {/* Pooling Visual - Two Circles */}
             <div className="flex items-center justify-center gap-6">
-              {/* Left Circle - 1 Company */}
+              {/* Left Circle - 1 Enterprise Company */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5, delay: 0.3 }}
-                className="flex h-40 w-40 md:h-48 md:w-48 flex-col items-center justify-center rounded-full bg-brand-blue text-white shadow-lg"
+                className="flex flex-col items-center"
               >
-                <span className="text-3xl md:text-4xl font-bold">1</span>
-                <span className="text-sm md:text-base font-medium">Company</span>
-                <div className="mt-2 h-px w-12 bg-white/40" />
-                <span className="mt-2 text-lg md:text-xl font-semibold">10,000</span>
-                <span className="text-xs md:text-sm">lives</span>
+                <div className="flex h-40 w-40 md:h-48 md:w-48 items-center justify-center rounded-full bg-brand-blue shadow-lg">
+                  {/* Single large pulsing icon representing enterprise */}
+                  <motion.div
+                    className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-white/20 border-2 border-white/40"
+                    animate={{
+                      scale: [1, 1.15, 1],
+                      opacity: [0.8, 1, 0.8],
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                  />
+                </div>
+                <span className="mt-3 text-sm md:text-base font-semibold text-brand-darkBlue text-center">
+                  1 Enterprise Company
+                </span>
               </motion.div>
 
               {/* Equals Sign */}
@@ -153,18 +166,76 @@ const CakewalkSlide2 = ({ onNavigateNext }: CakewalkSlide2Props) => {
                 =
               </motion.span>
 
-              {/* Right Circle - 2,500 Companies */}
+              {/* Right Circle - SMB Pooling with animated floating circles */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5, delay: 0.4 }}
-                className="flex h-40 w-40 md:h-48 md:w-48 flex-col items-center justify-center rounded-full bg-brand-mint text-brand-darkBlue shadow-lg"
+                className="flex flex-col items-center"
               >
-                <span className="text-3xl md:text-4xl font-bold">2,000</span>
-                <span className="text-sm md:text-base font-medium">Companies</span>
-                <div className="mt-2 h-px w-12 bg-brand-darkBlue/40" />
-                <span className="mt-2 text-lg md:text-xl font-semibold">10,000</span>
-                <span className="text-xs md:text-sm">lives</span>
+                <div className="relative flex h-40 w-40 md:h-48 md:w-48 items-center justify-center rounded-full bg-brand-mint shadow-lg overflow-hidden">
+                  {/* Many small animated circles representing SMBs - fluid motion */}
+                  {Array.from({ length: 35 }).map((_, i) => {
+                    // Varied sizes for visual interest
+                    const size = 8 + Math.random() * 14; // 8-22px
+                    // Distribute across the circle
+                    const angle = (i / 35) * Math.PI * 2 + Math.random() * 0.5;
+                    const radius = 15 + Math.random() * 30; // % from center
+                    const initialX = 50 + Math.cos(angle) * radius;
+                    const initialY = 50 + Math.sin(angle) * radius;
+                    // Slower, more fluid animation
+                    const duration = 4 + Math.random() * 4; // 4-8 seconds
+                    const delay = Math.random() * 3; // staggered start
+                    
+                    // Create smooth circular/orbital motion paths
+                    const orbitRadius = 8 + Math.random() * 12;
+                    const direction = Math.random() > 0.5 ? 1 : -1;
+                    
+                    return (
+                      <motion.div
+                        key={i}
+                        className="absolute rounded-full bg-brand-darkBlue/25 border border-brand-darkBlue/20"
+                        style={{
+                          width: size,
+                          height: size,
+                          left: `${initialX}%`,
+                          top: `${initialY}%`,
+                          transform: 'translate(-50%, -50%)',
+                        }}
+                        animate={{
+                          x: [
+                            0,
+                            direction * orbitRadius,
+                            direction * orbitRadius * 0.7,
+                            0,
+                            -direction * orbitRadius * 0.5,
+                            -direction * orbitRadius,
+                            0,
+                          ],
+                          y: [
+                            0,
+                            orbitRadius * 0.5,
+                            orbitRadius,
+                            orbitRadius * 0.7,
+                            orbitRadius,
+                            orbitRadius * 0.3,
+                            0,
+                          ],
+                          opacity: [0.7, 0.9, 0.8, 1, 0.85, 0.75, 0.7],
+                        }}
+                        transition={{
+                          duration: duration,
+                          delay: delay,
+                          repeat: Infinity,
+                          ease: "linear",
+                        }}
+                      />
+                    );
+                  })}
+                </div>
+                <span className="mt-3 text-sm md:text-base font-semibold text-brand-darkBlue text-center">
+                  SMBs pooled via Cakewalk
+                </span>
               </motion.div>
             </div>
 

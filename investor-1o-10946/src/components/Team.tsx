@@ -17,9 +17,9 @@ const leadership = [
     image: paulPhoto,
     highlights: [
       "ex-Chief Underwriting Officer at Prudential",
-      "Leading expert on group benefit underwriting",
       "Former Chief Insurance Officer at Salty (acquired by CDK Global).",
-      "President at IBX, exited to Alliant Insurance Services"
+      "President at IBX, exited to Alliant Insurance Services",
+      "Leading expert on group benefit underwriting"
     ]
   },
   {

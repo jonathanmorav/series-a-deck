@@ -35,7 +35,7 @@ const CustomerJourneySlide = ({ onNavigateNext }: CustomerJourneySlideProps) => 
       "Where do I even start?",
       "Everyone's trying to sell me something",
       "I don't understand what I'm buying",
-      "More paperwork? Again?",
+      "What's a census?",
       "I'm paying more for less coverage",
     ],
     [
