@@ -30,8 +30,8 @@ const MobileSlideContainer: React.FC<MobileSlideContainerProps> = ({
   return (
     <section
       className={cn(
-        // Full viewport width, min height to fill screen
-        "min-h-screen w-full",
+        // Full viewport width, min height to fill screen (dvh for Safari compatibility)
+        "min-h-[100dvh] w-full",
         // Padding for mobile
         "px-5 py-8 pb-20",
         // Background
@@ -42,7 +42,7 @@ const MobileSlideContainer: React.FC<MobileSlideContainerProps> = ({
       onClick={onNavigateNext}
     >
       {/* Content Area */}
-      <div className="relative flex flex-col items-center justify-center min-h-[calc(100vh-6rem)]">
+      <div className="relative flex flex-col items-center justify-center min-h-[calc(100dvh-6rem)]">
         {children}
       </div>
 

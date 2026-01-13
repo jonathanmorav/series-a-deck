@@ -55,8 +55,8 @@ const SlideContainer: React.FC<SlideContainerProps> = ({
   return (
     <section
       className={cn(
-        // Full viewport container with centering
-        "min-h-screen w-full flex items-center justify-center",
+        // Full viewport container with centering (dvh accounts for browser chrome in Safari)
+        "min-h-[100dvh] w-full flex items-center justify-center",
         // Padding to ensure slide doesn't touch edges
         "p-4 md:p-6 lg:p-8"
       )}
@@ -66,8 +66,8 @@ const SlideContainer: React.FC<SlideContainerProps> = ({
         className={cn(
           // 16:9 aspect ratio constraint
           "aspect-[16/9] w-full max-w-[1920px]",
-          // Max height to prevent overflow on tall screens
-          "max-h-[calc(100vh-4rem)]",
+          // Max height to prevent overflow on tall screens (dvh for Safari compatibility)
+          "max-h-[calc(100dvh-4rem)]",
           // Base styling
           "relative overflow-hidden",
           // Border radius for modern look
